@@ -31,9 +31,8 @@ html {
 body {
   background-color: var(--bg);
   color: var(--text-body);
-  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 1rem;
-  line-height: 1.6;
 }
 
 a {
@@ -47,6 +46,14 @@ a:hover {
 h1, h2, h3 {
   color: var(--text-strong);
   font-weight: 600;
+}
+
+main {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding-top: 4.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 /************** Navbar **************/
@@ -93,4 +100,206 @@ nav ul li a:hover,
 nav ul li a.active {
   color: var(--accent);
   text-decoration: underline;
+}
+
+/************** About **************/
+
+#about {
+  padding: 4rem 0;
+}
+
+.about-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+  gap: 3rem;
+}
+
+.about-photo figure {
+  margin: 0;
+}
+.about-photo img {
+  height: auto;
+  border: 2px solid var(--bg-hl);
+  border-radius: 0.5rem;
+}
+
+.about-text h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+.about-info {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+.about-bio {
+  font-size: 1rem;
+  color: var(--text-em);
+}
+
+/************** Work **************/
+
+#work {
+  background-color: var(--bg-hl);
+  border-radius: 0.5rem;
+  padding: 4rem 2rem;
+}
+
+#work h2 {
+  font-size: 1.75rem;
+  color: var(--text-strong);
+  margin-bottom: 2rem;
+}
+
+.work-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.work-card {
+  background-color: var(--bg);
+  border: 1px solid var(--bg-hl);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+}
+
+.work-title {
+  font-size: 1.1rem;
+  color: var(--text-strong);
+  margin-bottom: 0.25rem;
+}
+.work-company {
+  font-size: 0.95rem;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+.work-dates {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+.work-description {
+  font-size: 0.95rem;
+  color: var(--text-em);
+}
+
+/************** Skills **************/
+
+.skills-container h3 {
+  font-size: 1.2rem;
+  color: var(--text-strong);
+  margin-bottom: 1rem;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.skills-group h4 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-em);
+  margin-bottom: 0.75rem;
+}
+.skills-group ul {
+  list-style: none;
+}
+.skills-group ul li {
+  font-size: 0.95rem;
+  color: var(--text-body);
+  border-bottom: 1px solid var(--bg-hl);
+  padding: 0.25rem 0;
+}
+
+/************** Contact **************/
+
+#contact {
+  padding: 4rem 0;
+}
+
+#contact h2 {
+  font-size: 1.75rem;
+  color: var(--text-strong);
+  margin-bottom: 2rem;
+}
+
+.contact-form {
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+.form-group label {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--text-em);
+  margin-bottom: 0.4rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  font-size: 1rem;
+  color: var(--text-strong);
+  background-color: var(--bg-hl);
+  border: 1px solid var(--text-muted);
+  border-radius: 0.25rem;
+  padding: 0.6rem 0.8rem;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--magenta);
+}
+
+.btn-submit {
+  font-size: 1rem;
+  color: var(--bg);
+  background-color: var(--cyan);
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  padding: 0.6rem 1.5rem;
+}
+.btn-submit:hover {
+  opacity: 0.85;
+}
+
+/************** Footer **************/
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-hl);
+  border-top: 1px solid var(--text-muted);
+  padding: 1.5rem 2rem;
+}
+
+footer p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+footer ul {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+}
+
+footer ul li a {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+footer ul li a:hover {
+  color: var(--accent);
 }
