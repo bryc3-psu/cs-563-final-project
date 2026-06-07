@@ -303,3 +303,111 @@ footer ul li a {
 footer ul li a:hover {
   color: var(--accent);
 }
+
+/************** Projects **************/
+
+#projects {
+  padding: 4rem 0;
+}
+
+#projects h2 {
+  font-size: 1.75rem;
+  color: var(--text-strong);
+  margin-bottom: 2rem;
+}
+
+/* Card Grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+/* Card Layout */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--bg-hl);
+  border: 1px solid var(--text-muted);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+}
+.project-card-header {
+  margin-bottom: 0.75rem;
+}
+.project-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+/* Card Headers */
+.project-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-strong);
+  margin-bottom: 0.4rem;
+}
+.project-description {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text-em);
+}
+.project-stats {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+.project-stat {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Card Footers */
+.project-lang {
+  display: inline-block;
+  font-size: 0.75rem;
+  border-radius: 1rem;
+  padding: 0.2rem 0.65rem;
+}
+.project-lang--cpp {
+  color: var(--bg);
+  background-color: var(--violet);
+}
+.project-lang--c {
+  color: var(--bg);
+  background-color: var(--blue);
+}
+.project-lang--python {
+  color: var(--bg);
+  background-color: var(--green);
+}
+.project-lang--html {
+  color: var(--bg);
+  background-color: var(--orange);
+}
+.project-lang--default {
+  color: var(--bg);
+  background-color: var(--text-muted);
+}
+.project-link {
+  font-size: 0.85rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+.project-link:hover {
+  text-decoration: underline;
+}
+
+/* Card Messages */
+.projects-loading {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+.projects-error {
+  font-size: 0.95rem;
+  color: var(--red);
+}

@@ -51,3 +51,30 @@ None at this stage.
 
 **Outside sources:**
 None.
+
+## Commit 3: Projects Section via Github API
+
+**HTML/CSS:** The projects section of the HTML is an empty grid (to be filled in by JS). This is styled as a grid display (repeat(4, 1fr)) of four "project cards" per a row. Each individual project card uses a flex display (column flex direction), and space-between content justification to push the footer towards the bottom. To give the language keys unique per-language colors I also made a class for each language (project-lang--cpp, project-lang--c, etc.) to map each to a specific CSS property color definition. Project stats also needed to ave a flex display and a --text-muted color to keep it visually below the project name and description.
+
+**JS:** The process of creating the project cards is split between two functions:
+
+- `fetchProjects`: this function handles the API request `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=pushed&direction=desc&per_page=8`. This fetches the 8 most recently pushed repos for my GitHub accont. This function returns the fetch response as JSON, filters out forks, and with `.forEach` steps through each repo and calls `buildProjectCard` and appends it's returned object to the projects grid queried from the DOM.
+
+- `buildProjectCard`: The goal of this function is to build and return an individual project card. It takes a single deserialized JSON repo object as an arg and then extracts the following fields:
+    - repo.name
+    - repo.description
+    - repo.language
+    - repo.html_url
+    - repo.stargazers_count
+    - repo.forks_count
+    - repo.open_issues_count
+
+  and then adds them to the corresponding place of the DOM object to fill out the card contents, before finally retuning the card object.
+
+**Issues:**
+I was having a hard time with the stars part of the stats for the card. to figure out why I `curl`'d the API endpoint and read through the response, and noticed I had the field name wrong! After fixing that it appeared as I expted it to.
+
+**Outside sources:**
+
+- GitHub API: https://docs.github.com/en/rest?apiVersion=2026-03-10
+
