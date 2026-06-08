@@ -66,6 +66,13 @@ const isValidEmail = function _isValidEmail(email) {
   return emailRegex.test(email);
 };
 
+const showFormError = function _showFormError(input, message) {
+  const error = document.createElement('span');
+  error.classList.add('form-error');
+  error.textContent = message;
+  input.insertAdjacentElement('afterend', error);
+};
+
 const handleSubmit = function _handleSubmit(event) {
   event.preventDefault();
   let valid = true;
@@ -76,20 +83,23 @@ const handleSubmit = function _handleSubmit(event) {
   const email = form.elements.email.value.trim();
   const message = form.elements.message.value.trim();
 
+  // remove old error msgs
+  form.querySelectorAll('.form-error').forEach((element) => element.remove());
+
   // check no fields are empty and email is right format
   if (!name) {
-    console.log('Name is required.');
+    showFormError(form.elements.name, 'Missing name!');
     valid = false;
   }
   if (!email) {
-    console.log('Email is required.');
+    showFormError(form.elements.email, 'Missing email address!');
     valid = false;
   } else if (!isValidEmail(email)) {
-    console.log('Email is invalid.');
+    showFormError(form.elements.email, 'Invalid email address!');
     valid = false;
   }
   if (!message) {
-    console.log('Message is required.');
+    showFormError(form.elements.message, 'Empty message!');
     valid = false;
   }
 
@@ -107,6 +117,31 @@ const handleSubmit = function _handleSubmit(event) {
         }
         console.log('Form submitted successfully.');
         form.reset();
+
+        // build success popup
+        const overlay = document.createElement('div');
+        const dialog = document.createElement('div');
+        const heading = document.createElement('h2');
+        const msg = document.createElement('p');
+        const closeBtn = document.createElement('button');
+        overlay.classList.add('popup-overlay');
+        dialog.classList.add('success-dialog');
+        closeBtn.classList.add('btn-submit');
+        heading.setAttribute('id', 'popup-heading');
+        overlay.setAttribute('role', 'dialog');
+        heading.textContent = 'Message Sent!';
+        msg.textContent = "Thanks for reaching out.";
+        closeBtn.textContent = 'OK';
+
+        // listener to delete dialog overlay on OK click
+        closeBtn.addEventListener('click', () => overlay.remove());
+
+        // append heading msg and btn to dialog
+        dialog.append(heading, msg, closeBtn);
+        // append dialog to the overlay
+        overlay.append(dialog);
+        // append overlay to the body
+        document.body.append(overlay);
       })
       .catch((error) => {
         console.error(error);
@@ -127,11 +162,10 @@ fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=pushed&directi
   })
   .then((repos) => {
     const grid = document.querySelector('.projects-grid');
-    const filtered = repos.filter((repo) => !repo.fork);
     grid.innerHTML = '';
-    filtered.forEach((repo) => {
-      grid.append(buildProjectCard(repo));
-    });
+    repos
+      .filter((repo) => !repo.fork)
+      .forEach((repo) => grid.append(buildProjectCard(repo)));
   })
   .catch((error) => {
     console.error(error);
