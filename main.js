@@ -60,31 +60,81 @@ const buildProjectCard = function _buildProjectCard(repo) {
   return card;
 };
 
-const fetchProjects = function _fetchProjects() {
-  const grid = document.querySelector('.projects-grid');
-
-  // fetch 8 most recent repos
-  fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=pushed&direction=desc&per_page=8`)
-    // if success, return as JSON
-    .then(function _handleResponse(response) {
-      if (!response.ok) {
-        throw new Error('Failed to fetch GitHub repos...');
-      }
-      return response.json();
-    })
-    .then(function _renderRepos(repos) {
-      const filtered = repos.filter((repo) => !repo.fork);
-
-      // step through and build + append cards
-      grid.innerHTML = '';
-      filtered.forEach((repo) => {
-        grid.append(buildProjectCard(repo));
-      });
-    })
-    .catch(function _handleError(error) {
-      console.error(error);
-      grid.innerHTML = '<p class="projects-error">Failed to get GitHub repos...</p>';
-    });
+const isValidEmail = function _isValidEmail(email) {
+  // from: https://medium.com/@sketch.paintings/email-validation-with-javascript-regex-e1b40863ed23
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return emailRegex.test(email);
 };
 
-fetchProjects();
+const handleSubmit = function _handleSubmit(event) {
+  event.preventDefault();
+  let valid = true;
+
+  // grab form elements
+  const form = event.target;
+  const name = form.elements.name.value.trim();
+  const email = form.elements.email.value.trim();
+  const message = form.elements.message.value.trim();
+
+  // check no fields are empty and email is right format
+  if (!name) {
+    console.log('Name is required.');
+    valid = false;
+  }
+  if (!email) {
+    console.log('Email is required.');
+    valid = false;
+  } else if (!isValidEmail(email)) {
+    console.log('Email is invalid.');
+    valid = false;
+  }
+  if (!message) {
+    console.log('Message is required.');
+    valid = false;
+  }
+
+  // If tests passed, POST the submission to formspree
+  if (valid) {
+    fetch('https://formspree.io/f/mbdegnrb', {
+      method: 'POST',
+      mode: 'cors',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(form),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Submission failed');
+        }
+        console.log('Form submitted successfully.');
+        form.reset();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+};
+
+// form submission listener
+document.querySelector('.contact-form').addEventListener('submit', handleSubmit);
+
+// fetch repos from GitHub and build + append project cards
+fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=pushed&direction=desc&per_page=8`)
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error('Failed to fetch repositories');
+    }
+    return response.json();
+  })
+  .then((repos) => {
+    const grid = document.querySelector('.projects-grid');
+    const filtered = repos.filter((repo) => !repo.fork);
+    grid.innerHTML = '';
+    filtered.forEach((repo) => {
+      grid.append(buildProjectCard(repo));
+    });
+  })
+  .catch((error) => {
+    console.error(error);
+    const grid = document.querySelector('.projects-grid');
+    grid.innerHTML = '<p class="projects-error">Failed to load projects. Please try again later.</p>';
+  });

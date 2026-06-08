@@ -78,3 +78,31 @@ I was having a hard time with the stars part of the stats for the card. to figur
 
 - GitHub API: https://docs.github.com/en/rest?apiVersion=2026-03-10
 
+## Commit 4: Form Validation + Formspree serverless submission
+
+**HTML/CSS:** Updated the action on the contact form to point to the Formspree endpoint. No errors are displayed yet. JS to add and remove those will come in a later commit, for now I am just using console logs.
+
+**JS:** I added an event listener to `contact-form` and added two functions to both handle and validate the form submission event:
+
+- `isValidEmail`: This is a simple helper function that uses REGEX to test the email string is (likely) a valid email address.
+- `handleSubmit`: This is the even handler for the form's submit button. `prevenDefault` is called at the top to prevent the page from navigating to the Formspree endpoint. From there the function grabs the form fields from the DOM and confirms they are non-empty and that the email string is in the right format. For now failures are just output to the console. If all validations pass, `fetch` is used to perform an HTTP POST to the Formspree endpoint with the `FormData(form)` as the body. Note the `Accept: application/json` header to deal with CORS.
+
+**Issues:**
+
+- Initially I would get the following error when trying to submit: `Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at https://formspree.io/thanks?language=en. (Reason: CORS header ‘Access-Control-Allow-Origin’ missing). Status code: 200`. Eventually I was able to find Formspree includes a script that implements the same logic I am doing manually (see Outside sources below). From there I saw that they were including the following with their POST request:
+
+```javascript
+mode: 'cors',
+headers: { Accept: 'application/json' },
+```
+
+After adding the header and changin the mode to `cors` the form would submit.
+
+![formspree email](./assets/images/formspree-test.png)
+
+- Once I fixed the CORS issue, I would get redirected to the endpoint when I submitted. I eventually looked at the `16-forms.js` in the code-samples and saw `prevenDefault` was at the top of the event handler. Adding that to my handler fixed this issue.
+
+**Outside sources:**
+
+- Email validation regex: https://medium.com/@sketch.paintings/email-validation-with-javascript-regex-e1b40863ed23
+- Formspree Source Code: https://github.com/formspree/formspree-js/blob/main/packages/formspree-core/src/core.ts
