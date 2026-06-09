@@ -2,7 +2,7 @@
 
 A personal website built for CS-563.
 
-Deployed: 
+Deployed: https://web.cecs.pdx.edu/~bryc3/
 
 ## Running Locally
 
