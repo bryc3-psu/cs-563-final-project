@@ -172,3 +172,19 @@ fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=pushed&directi
     const grid = document.querySelector('.projects-grid');
     grid.innerHTML = '<p class="projects-error">Failed to load projects. Please try again later.</p>';
   });
+
+// section observer for highlighting links of current active section
+const navLinks = document.querySelectorAll('nav ul li a');
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      navLinks.forEach((link) => link.classList.remove('active'));
+      const activeLink = document.querySelector(`nav ul li a[href="#${entry.target.id}"]`);
+      if (activeLink) activeLink.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -60% 0px' });
+
+document.querySelectorAll('main section').forEach((section) => {
+  sectionObserver.observe(section);
+});

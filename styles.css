@@ -1,19 +1,19 @@
 :root {
-  --bg:          #fdf6e3;
-  --bg-hl:       #eee8d5;
-  --text-muted:  #93a1a1;
-  --text-body:   #839496;
-  --text-em:     #657b83;
-  --text-strong: #586e75;
-  --yellow:      #b58900;
-  --orange:      #cb4b16;
-  --red:         #dc322f;
-  --magenta:     #d33682;
-  --violet:      #6c71c4;
-  --blue:        #268bd2;
-  --cyan:        #2aa198;
-  --green:       #859900;
-  --accent:      #2aa198;
+  --bg:          #ffffff;
+  --bg-hl:       #f5f5f0;
+  --text-muted:  #8a8a67;
+  --text-body:   #333333;
+  --text-em:     #222222;
+  --text-strong: #111111;
+  --yellow:      #ffc20e;
+  --orange:      #f68b1f;
+  --red:         #e64927;
+  --magenta:     #650360;
+  --violet:      #650360;
+  --blue:        #008ac1;
+  --cyan:        #a5dff9;
+  --green:       #7a8f4a;
+  --accent:      #7a8f4a;
 }
 
 /************** Base **************/
@@ -33,6 +33,10 @@ body {
   color: var(--text-body);
   font-family: Arial, sans-serif;
   font-size: 1rem;
+  background-color: var(--bg);
+  background-image: radial-gradient(circle, rgba(109, 141, 36, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--text-body);
 }
 
 a {
@@ -64,24 +68,21 @@ header {
   left: 0;
   width: 100%;
   z-index: 100;
-  background: var(--bg-hl);
   backdrop-filter: blur(6px);
-  border-bottom: 1px solid var(--magenta);
+  border-bottom: 1px solid var(--green);
 }
 
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1090px;
-  margin: 0 auto;
+  width: 100%;
   padding: 1rem 2rem;
 }
 
-.nav-name {
-  color: var(--text-strong);
-  font-weight: 600;
-  font-size: 1.3rem;
+.nav-logo img {
+  height: 2.5rem;
+  width: auto;
 }
 
 nav ul {
@@ -91,15 +92,21 @@ nav ul {
 }
 
 nav ul li a {
+  font-size: 0.95rem
   color: var(--text-em);
   text-decoration: none;
   font-size: 0.95rem;
+  transition: font-size 0.2s ease, color 0.2s ease;
 }
 
-nav ul li a:hover,
-nav ul li a.active {
-  color: var(--accent);
+nav ul li a:hover {
+  color: var(--text-strong);
   text-decoration: underline;
+}
+nav ul li a.active {
+  font-size: 1.05rem;
+  color: var(--accent);
+  font-weight: 600;
 }
 
 /************** About **************/
@@ -143,7 +150,7 @@ nav ul li a.active {
 #work {
   background-color: var(--bg-hl);
   border-radius: 0.5rem;
-  padding: 4rem 2rem;
+  padding: 2rem 2rem;
 }
 
 #work h2 {
@@ -228,9 +235,16 @@ nav ul li a.active {
   margin-bottom: 2rem;
 }
 
+.contact-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 4rem;
+  align-items: stretch;
+}
+
+/*contact-form */
 .contact-form {
-  max-width: 36rem;
-  margin: 0 auto;
+  width: 100%;
 }
 
 .form-group {
@@ -255,7 +269,7 @@ nav ul li a.active {
 }
 .form-group input:focus,
 .form-group textarea:focus {
-  border-color: var(--magenta);
+  border-color: var(--green);
 }
 
 .btn-submit {
@@ -269,6 +283,58 @@ nav ul li a.active {
 }
 .btn-submit:hover {
   opacity: 0.85;
+}
+
+/* contact info columns */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-hl);
+  border: 1px solid var(--text-muted);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  max-width: 35rem;
+  margin: 2rem 4rem 4rem 4rem;
+}
+.contact-info h3 {
+  font-size: 1.2rem;
+  color: var(--text-strong);
+  margin-bottom: 2rem;
+}
+.contact-info p {
+  font-size: 0.95rem;
+  color: var(--text-em);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.contact-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.contact-links li a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  color: var(--text-strong);
+  background-color: var(--bg);
+  border: 1px solid var(--text-muted);
+  border-radius: 2rem;
+  text-decoration: none;
+  padding: 0.6rem 1.25rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.contact-links li a:hover {
+  background-color: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+  text-decoration: none;
+}
+.contact-links li a i {
+  font-size: 1rem;
 }
 
 /* container for success dialog. covers full page and slightly darkens */
@@ -320,7 +386,7 @@ footer {
   align-items: center;
   background-color: var(--bg-hl);
   border-top: 1px solid var(--text-muted);
-  padding: 1.5rem 2rem;
+  padding: 0.5rem 1rem;
 }
 
 footer p {
@@ -450,3 +516,5 @@ footer ul li a:hover {
   font-size: 0.95rem;
   color: var(--red);
 }
+
+

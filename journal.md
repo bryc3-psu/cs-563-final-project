@@ -121,4 +121,21 @@ None
 
 - Using `insertAdjacentElement` for adding the error messages after inputs as siblings: https://codingnomads.com/create-element-javascript
 
-## Commit 6:
+## Commit 6: Overall Polish + Section Observer
+
+Since this commit was a bit more ecclectic instead of diving this section into HTML/CSS and JS, I will just explain each category of changes.
+
+**Navbar:** I replaced the text title of `.nva-name` with a PSU logo. I also updated the CSS for the nav links (in preperation of the Section Observer). The active styling now increases the font size, and the `transition: font-size 0.2s ease, color 0.2s ease` on the base link style gives this a smooth transition effect.
+
+**Conact Section:** The narrow form centered on the page looked clunky. So instead I created a `contact-container` with two columns grid display. The form stayed the sae and ended up in the left column. In the right I created a `.contact-info` card with a flex display (column flex direction). This recieved contact links (with Font Awesome icons now added via CDN). The links are now styled with a flex display and rounded border radius and a hover state that fills the background with `--accent` and switches text to `--bg` to highlight on hover.
+
+**Intersection Observer:** I created a simple section observer using the `IntersectionObserver` API using a WebDev Simplified guide (see outside sources). When a section intersects with the `rootMargin: '-20% 0px -60% 0px'` viewport window, the corrsponding nav link class is switched to active (giving it the highlighted larger font).
+
+**Issues:**
+
+- For the section observer, it took a bit of tweaking of the values to get the sections to activate at the correct scroll levels. 
+
+**Outside sources:**
+
+- Web Dev Simplified IntersectionObserver guide: https://blog.webdevsimplified.com/2022-01/intersection-observer/
+- Font Awesome CDN: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css
