@@ -139,3 +139,22 @@ Since this commit was a bit more ecclectic instead of diving this section into H
 
 - Web Dev Simplified IntersectionObserver guide: https://blog.webdevsimplified.com/2022-01/intersection-observer/
 - Font Awesome CDN: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css
+
+## Commit 7: Replaced Placeholders + Basic Mobile Support
+
+In addition to replacing the placehold text and image in `#about`, I also added a single @media (`max-width: 414px`) breakpoint for mobile with the following changes to the styling:
+
+- `.nav-logo img` height reduced to 2rem
+- `nav ul` gap reduced from 2rem to 1rem
+- `.about-container` grid changed to single column
+- `.about-text h1` font size reduced to 1.75rem
+- `.work-cards` grid changed to single column
+- `.skills-grid` grid changed to single column
+- `.projects-grid` grid changed to single column
+- `.contact-container` grid changed to single column
+- `.contact-info` now has a max-width of 100%
+
+**Issues:**
+None.
+**Outside sources:**
+None.
